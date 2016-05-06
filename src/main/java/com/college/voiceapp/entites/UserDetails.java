@@ -8,11 +8,18 @@ public class UserDetails {
 	@Id
 	@GeneratedValue
 	private int userId;
+	public UserDetails() {
+		super();
+	}
 	private String userName;
 	public UserDetails(String userName, int userType) {
 		super();
 		this.userName = userName;
 		this.userType = userType;
+	}
+	@Override
+	public String toString() {
+		return "UserDetails [userId=" + userId + ", userName=" + userName + ", userType=" + userType + "]";
 	}
 	public int getUserId() {
 		return userId;
