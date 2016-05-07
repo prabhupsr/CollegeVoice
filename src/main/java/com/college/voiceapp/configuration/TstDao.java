@@ -22,7 +22,13 @@ public class TstDao {
 	
 	@Transactional
 	public int saveData(UserDetails userDetails){
+		
 		 return (Integer) sessionFactory.getCurrentSession().save(userDetails);
+	}
+	
+	@Transactional
+	public UserDetails getUserDetails(String userName){
+		 return  ((List<UserDetails>) sessionFactory.getCurrentSession().createQuery("from UserDetails where userName like '"+userName+"'").list()).get(0);
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.college.voiceapp.configuration.TstDao;
 import com.college.voiceapp.entites.UserDetails;
 import com.college.voiceapp.utils.HibernateUtil;
 
-import oracle.jdbc.driver.OracleDriver;
+
 
 
 /**
@@ -27,6 +29,10 @@ import oracle.jdbc.driver.OracleDriver;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	TstDao tstDao;
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -41,7 +47,8 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
+		System.out.println(tstDao.fetchPersons());
+
 		return "home";
 	}
 	
@@ -50,9 +57,11 @@ public class HomeController {
 		
 		System.out.println("userName"+userName);
 		System.out.println(password);
+		System.out.println(tstDao.getUserDetails(userName));
 		/*Session session = HibernateUtil.getSessionFactory().openSession();
 
 		session.beginTransaction();
+		
 		
 		session.save(new UserDetails("prabhu", 1));
 		session.getTransaction().commit();
