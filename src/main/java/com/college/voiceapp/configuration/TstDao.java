@@ -21,8 +21,8 @@ public class TstDao {
 	}
 	
 	@Transactional
-	public void saveData(UserDetails userDetails){
-		sessionFactory.getCurrentSession().save(userDetails);
+	public int saveData(UserDetails userDetails){
+		 return (Integer) sessionFactory.getCurrentSession().save(userDetails);
 	}
 
 }

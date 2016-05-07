@@ -39,7 +39,7 @@ public class DBConfig {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", env.getProperty("jdbc.dialect"));
 		properties.put("hibernate.show_sql", "true");
-		/*properties.put("hibernate.hbm2ddl.auto", "create");*/
+		properties.put("hibernate.hbm2ddl.auto", "create");
 		/*properties.put("current_session_context_class", "thread");*/
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setPackagesToScan(new String[] { "com.college.voiceapp.entites" });

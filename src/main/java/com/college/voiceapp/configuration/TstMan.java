@@ -1,5 +1,6 @@
 package com.college.voiceapp.configuration;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,7 +12,7 @@ import com.college.voiceapp.entites.UserDetails;
 @Configuration
 public class TstMan {
 	
-	/*
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -19,12 +20,12 @@ public class TstMan {
 				DBConfig.class);
 		TstDao tstDao=((TstDao) context.getBean("TstDao"));
 		
-		for(int i=1;i<11;i++){
-			tstDao.saveData(new UserDetails("pr"+i, i));
+		for(int i=1;i<2;i++){
+			System.out.println(tstDao.saveData(new UserDetails("prabhu", "prr",1,new Date())));
 		}
 		List persons = ((TstDao) context.getBean("TstDao"))
 				.fetchPersons();
 		System.out.println(persons);
-	}*/
+	}
 
 }

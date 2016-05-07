@@ -11,9 +11,10 @@
 <form action="/voiceapp/login/" method="post" id="form1">
   User Name : <input type="text" name="userName"><br>
   Password : <input type="text" name="password"><br>
+  <button type="submit" form="form1" value="Submit">Submit</button>
 </form>
 
-<button type="submit" form="form1" value="Submit">Submit</button>
+
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
