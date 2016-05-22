@@ -23,9 +23,8 @@
   <label for="messagearea">Messages:</label>
   <textarea class="form-control" rows="5" id="messagearea"></textarea>
 </div>
-<button id="postMsg">
-         PostMessage
-      </button>
+<button class="table-title" id="postMsg">PostMessage</button>
+	  <div id="msgLstDiv"></div>
 <table>
 <tr>
 <td>name</td>

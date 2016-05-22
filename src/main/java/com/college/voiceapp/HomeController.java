@@ -1,7 +1,10 @@
 package com.college.voiceapp;
 
 import java.text.DateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.hibernate.Session;
@@ -80,11 +83,21 @@ public class HomeController {
 		
 		
 		tstDao.postMessage(new Messages(message,"1",new Date(),new Date())) ;
-		System.out.println(tstDao.fetchAllMessages());
+		
+		List<Messages> fetchAllMessages = tstDao.fetchAllMessages();
+		Collections.sort(fetchAllMessages, new Comparator<Messages>() {
+
+			@Override
+			public int compare(Messages o1, Messages o2) {
+				// TODO Auto-generated method stub
+				return o2.getCreatedDate().compareTo(o1.getCreatedDate());
+			}
+		});
+		System.out.println(fetchAllMessages);
 		// create a new Gson instance
 		 Gson gson = new Gson();
 		 // convert your list to json
-		 String jsonCartList = gson.toJson(tstDao.fetchAllMessages());
+		 String jsonCartList = gson.toJson(fetchAllMessages);
 		
 		
 		return jsonCartList;
