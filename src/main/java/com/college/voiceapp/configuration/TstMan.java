@@ -20,9 +20,9 @@ public class TstMan {
 				DBConfig.class);
 		TstDao tstDao=((TstDao) context.getBean("TstDao"));
 		
-		/*for(int i=1;i<2;i++){
+		for(int i=1;i<2;i++){
 			System.out.println(tstDao.saveData(new UserDetails("prabhu", "prr",1,new Date())));
-		}*/
+		}
 		List persons = ((TstDao) context.getBean("TstDao"))
 				.fetchPersons();
 		System.out.println(persons);

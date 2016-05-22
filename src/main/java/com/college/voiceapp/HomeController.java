@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.college.voiceapp.configuration.ReferenceData;
 import com.college.voiceapp.configuration.TstDao;
+import com.college.voiceapp.entites.Messages;
 import com.college.voiceapp.entites.UserDetails;
 import com.college.voiceapp.utils.HibernateUtil;
+import com.google.gson.Gson;
 
 
 
@@ -49,27 +52,17 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		System.out.println(tstDao.fetchPersons());
 
-		return "home";
+		return "login";
 	}
 	
-	@RequestMapping(value = "/login/", method = RequestMethod.POST)
+	@RequestMapping(value = "/login/", method = RequestMethod.GET)
 	public String loginPage(Locale locale, Model model,@RequestParam("userName") String userName,@RequestParam("password") String password) {
+		//tstDao.saveData(new UserDetails("prabhu", "prr",1,new Date()));
+		UserDetails userDetails = tstDao.getUserDetails(userName,password);
+		model.addAttribute("reloadID", "true");
+		String  userType=(userDetails == null)?"login":"home"/*ReferenceData.userTypeMappng[userDetails.getUserType()]*/;
 		
-		System.out.println("userName"+userName);
-		System.out.println(password);
-		System.out.println(tstDao.getUserDetails(userName));
-		/*Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		
-		
-		session.save(new UserDetails("prabhu", 1));
-		session.getTransaction().commit();
-		System.out.println("done");*/
-
-		
-		
-		return "login";
+		return userType;
 	}/*
 	public static void main(String[] args){
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -81,23 +74,20 @@ public class HomeController {
 		System.out.println("done");
 	}*/
 	
-	@RequestMapping(value = "/login1/", method = RequestMethod.POST)
+	@RequestMapping(value = "/postmessage/", method = RequestMethod.GET)
 	@ResponseBody
-	public String loginPage1(Locale locale, Model model,@RequestParam("userName") String userName,@RequestParam("password") String password) {
-		
-		System.out.println(userName);
-		System.out.println(password);
-		/*Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		
-		session.save(new UserDetails("prabhu", 1));
-		session.getTransaction().commit();
-		System.out.println("done");*/
-
+	public String loginPage1(Locale locale, Model model,@RequestParam("message") String message) {
 		
 		
-		return "Successfully Logged in...";
+		tstDao.postMessage(new Messages(message,"1",new Date(),new Date())) ;
+		System.out.println(tstDao.fetchAllMessages());
+		// create a new Gson instance
+		 Gson gson = new Gson();
+		 // convert your list to json
+		 String jsonCartList = gson.toJson(tstDao.fetchAllMessages());
+		
+		
+		return jsonCartList;
 	}
 	
 

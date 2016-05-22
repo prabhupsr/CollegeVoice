@@ -9,7 +9,7 @@ $('input[type="text"],input[type="password"]').css("border","2px solid red");
 $('input[type="text"],input[type="password"]').css("box-shadow","0 0 3px red");
 alert("Please fill all fields...!!!!!!");
 }else {
-$.post("login.php",{ email1: email, password1:password},
+$.get("login.php",{ email1: email, password1:password},
 function(data) {
 if(data=='Invalid Email.......') {
 $('input[type="text"]').css({"border":"2px solid red","box-shadow":"0 0 3px red"});
