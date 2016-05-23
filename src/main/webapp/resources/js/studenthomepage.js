@@ -4,8 +4,11 @@ $(document).ready(function(){
 	
 	$(document.body).on('click', 'button', function() {
 	    alert ('button ' + this.id + ' clicked');
-	    if( this.id.indexOf('like') >= 0){
+	    if( this.id.indexOf('likemsgid') >= 0){
 	    	  // Found world
+	    	$.get("/voiceapp/updatelike/",{ messageID: this.id.substring(9)},
+	    			function(data) {	})
+	    	
 	    	$("#"+this.id).attr('disabled','disabled');
 	    	}
 	    
@@ -14,8 +17,7 @@ $(document).ready(function(){
 	
 $("#postMsg").click(function(){	
 	var msgtxt=$("#messagearea").val();
-	alert(msgtxt);
-	$("#messagearea").val('');
+	alert(msgtxt);	$("#messagearea").val('');
 	
 	
 	$.get("/voiceapp/postmessage/",{ message: msgtxt},
@@ -26,7 +28,7 @@ $("#postMsg").click(function(){
 			var obj = JSON.parse(data);
 			$.each(obj, function(i, v) {
 				console.log("pos"+i+"array val"+v)
-			tablestyle=tablestyle+"<tr><td>"+v.message+"</td><td>"+v.createdDate+"</td><td><button id="+"like"+v.messageId+">Like</button></td></tr>";
+			tablestyle=tablestyle+"<tr><td>"+v.message+"</td><td>"+v.createdDate+"</td><td><button id="+"likemsgid"+v.messageId+">Like</button></td></tr>";
 			});
 			tablestyle=tablestyle+"</table>";
 			console.log(tablestyle);
