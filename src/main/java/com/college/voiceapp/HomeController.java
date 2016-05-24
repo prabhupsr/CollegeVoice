@@ -26,6 +26,7 @@ import com.college.voiceapp.configuration.TstDao;
 import com.college.voiceapp.entites.MessageLikes;
 import com.college.voiceapp.entites.Messages;
 import com.college.voiceapp.entites.UserDetails;
+import com.college.voiceapp.pojo.MessageWithLike;
 import com.college.voiceapp.utils.HibernateUtil;
 import com.google.gson.Gson;
 
@@ -81,16 +82,43 @@ public class HomeController {
 	@ResponseBody
 	public String loginPage1( Model model,HttpSession httpSesson,@RequestParam("message") String message) {
 		
+		Integer userID=Integer.parseInt( httpSesson.getAttribute(ReferenceData.userID).toString());
 		
-		tstDao.postMessage(new Messages(message,1,new Date(),new Date())) ;
+		tstDao.postMessage(new Messages(message,userID,new Date(),new Date())) ;
 		
-		List<Messages> fetchAllMessages = tstDao.fetchAllMessages();
-		Collections.sort(fetchAllMessages, new Comparator<Messages>() {
+		List<MessageWithLike> fetchAllMessages = tstDao.fetchAllMessagesWithLike(Integer.parseInt( httpSesson.getAttribute(ReferenceData.userID).toString()));
+		Collections.sort(fetchAllMessages, new Comparator<MessageWithLike>() {
 
 			@Override
-			public int compare(Messages o1, Messages o2) {
+			public int compare(MessageWithLike o1, MessageWithLike o2) {
 				// TODO Auto-generated method stub
-				return o2.getCreatedDate().compareTo(o1.getCreatedDate());
+				return o2.getMessageId().compareTo(o1.getMessageId());
+			}
+		});
+		System.out.println(fetchAllMessages);
+		// create a new Gson instance
+		 Gson gson = new Gson();
+		 // convert your list to json
+		 String jsonCartList = gson.toJson(fetchAllMessages);
+		 System.out.println("from sesson"+httpSesson.getAttribute(ReferenceData.userID));
+		
+		return jsonCartList;
+	}
+	
+	@RequestMapping(value = "/getmessages/", method = RequestMethod.GET)
+	@ResponseBody
+	public String getMessages( Model model,HttpSession httpSesson,@RequestParam("message") String message) {
+		
+		
+		//tstDao.postMessage(new Messages(message,1,new Date(),new Date())) ;
+		
+		List<MessageWithLike> fetchAllMessages = tstDao.fetchAllMessagesWithLike(Integer.parseInt( httpSesson.getAttribute(ReferenceData.userID).toString()));
+		Collections.sort(fetchAllMessages, new Comparator<MessageWithLike>() {
+
+			@Override
+			public int compare(MessageWithLike o1, MessageWithLike o2) {
+				// TODO Auto-generated method stub
+				return o2.getMessageId().compareTo(o1.getMessageId());
 			}
 		});
 		System.out.println(fetchAllMessages);
