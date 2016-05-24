@@ -82,7 +82,7 @@ public class HomeController {
 	public String loginPage1( Model model,HttpSession httpSesson,@RequestParam("message") String message) {
 		
 		
-		tstDao.postMessage(new Messages(message,"1",new Date(),new Date())) ;
+		tstDao.postMessage(new Messages(message,1,new Date(),new Date())) ;
 		
 		List<Messages> fetchAllMessages = tstDao.fetchAllMessages();
 		Collections.sort(fetchAllMessages, new Comparator<Messages>() {
@@ -106,7 +106,7 @@ public class HomeController {
 	@RequestMapping(value = "/updatelike/", method = RequestMethod.GET)
 	@ResponseBody
 	public String updateMsgLike(Locale locale, Model model,HttpSession httpSesson,@RequestParam("messageID") int messageID) {
-		new MessageLikes(Integer.parseInt( httpSesson.getAttribute(ReferenceData.userID).toString()),messageID,new Date()); 
+		tstDao.postMessageLikes(new MessageLikes(Integer.parseInt( httpSesson.getAttribute(ReferenceData.userID).toString()),messageID,new Date())); 
 		System.out.println("messageID - "+messageID);
 		return "Done";
 	}

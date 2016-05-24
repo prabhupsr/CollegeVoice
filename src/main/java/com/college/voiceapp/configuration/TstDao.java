@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.college.voiceapp.entites.MessageLikes;
 import com.college.voiceapp.entites.Messages;
 import com.college.voiceapp.entites.UserDetails;
 
@@ -34,6 +35,12 @@ public class TstDao {
 	@Transactional
 	public boolean postMessage(Messages messages){		
 		sessionFactory.getCurrentSession().save(messages);
+		return true;		
+	}
+	
+	@Transactional
+	public boolean postMessageLikes(MessageLikes messagesLikes){		
+		sessionFactory.getCurrentSession().save(messagesLikes);
 		return true;		
 	}
 

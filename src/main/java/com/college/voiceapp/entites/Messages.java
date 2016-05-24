@@ -16,7 +16,7 @@ public class Messages {
 	public Messages() {
 		super();
 	}
-	private String messageUserId;
+	private int messageUserId;
 	private Date createdDate;
 	private Date editedDate;
 	@Override
@@ -24,13 +24,7 @@ public class Messages {
 		return "Messages [messageId=" + messageId + ", message=" + message + ", messageUserId=" + messageUserId
 				+ ", createdDate=" + createdDate + ", editedDate=" + editedDate + "]";
 	}
-	public Messages(String message, String messageUserId, Date createdDate, Date editedDate) {
-		super();
-		this.message = message;
-		this.messageUserId = messageUserId;
-		this.createdDate = createdDate;
-		this.editedDate = editedDate;
-	}
+	
 	public int getMessageId() {
 		return messageId;
 	}
@@ -43,12 +37,23 @@ public class Messages {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getMessageUserId() {
+	
+	public Messages(String message, int messageUserId, Date createdDate, Date editedDate) {
+		super();
+		this.message = message;
+		this.messageUserId = messageUserId;
+		this.createdDate = createdDate;
+		this.editedDate = editedDate;
+	}
+
+	public int getMessageUserId() {
 		return messageUserId;
 	}
-	public void setMessageUserId(String messageUserId) {
+
+	public void setMessageUserId(int messageUserId) {
 		this.messageUserId = messageUserId;
 	}
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}
