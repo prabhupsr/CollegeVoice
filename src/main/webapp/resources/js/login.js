@@ -1,4 +1,3 @@
-
 $(document).ready(
 		function() {
 			// alert($('#reloadID').val());
@@ -33,8 +32,7 @@ $(document).ready(
 							 * $('#userMsg').text("login failed ");
 							 * $("#userMsg").css("color", "red" );
 							 * $("#userMsg").css("font-size", "18px" ); } else{
-							 * alert(data);
-							 *  } });
+							 * alert(data); } });
 							 */
 						}
 					});

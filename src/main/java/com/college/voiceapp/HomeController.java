@@ -73,6 +73,7 @@ public class HomeController {
 		httpSesson.setAttribute(ReferenceData.userName, (userDetails == null)?null:userDetails.getUserName());
 		httpSesson.setAttribute(ReferenceData.userID, (userDetails == null)?null:userDetails.getUserId());
 		model.addAttribute("reloadID", "true");
+		model.addAttribute(ReferenceData.userID, (userDetails == null)?null:userDetails.getUserId());
 		String  userType=(userDetails == null)?"login":"home"/*ReferenceData.userTypeMappng[userDetails.getUserType()]*/;
 		
 		return userType;
